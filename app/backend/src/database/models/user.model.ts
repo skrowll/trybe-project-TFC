@@ -1,18 +1,18 @@
-import { INTEGER, Model, STRING } from 'sequelize';
+import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 
 class User extends Model {
-  public id?: number;
-  public username: string;
-  public role: string;
-  public email: string;
-  public password: string;
+  public id!: number;
+  public username!: string;
+  public role!: string;
+  public email!: string;
+  public password!: string;
 }
 
 User.init({
   id: {
-    primaryKey: true,
     type: INTEGER,
+    primaryKey: true,
     allowNull: false,
     autoIncrement: true,
   },
