@@ -10,7 +10,7 @@ const errorMiddleware: ErrorRequestHandler = (
   const { message } = error;
   // const { code } = error || 500;
   // const { message } = error || 'Internal server error';
-  return res.status(code).json(message);
+  return res.status(code).json({ message });
 };
 
 export default errorMiddleware;
