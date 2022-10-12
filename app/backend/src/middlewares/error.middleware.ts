@@ -6,10 +6,10 @@ const errorMiddleware: ErrorRequestHandler = (
   res: Response,
   _next: NextFunction,
 ) => {
-  const { code } = error;
-  const { message } = error;
-  // const { code } = error || 500;
-  // const { message } = error || 'Internal server error';
+  // const { code } = error;
+  // const { message } = error;
+  const { code } = error || 500;
+  const { message } = error || 'Internal server error';
   return res.status(code).json({ message });
 };
 
