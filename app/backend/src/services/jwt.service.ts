@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+import APIError from '../helpers/error.helper';
 
 const JWT_SECRET = 'jwt_secret';
 
@@ -12,9 +13,9 @@ export const createToken = (payload: object): string => {
 
 export const validateToken = (token: string) => {
   try {
-    const data = jwt.verify(token, JWT_SECRET);
-    return data;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    return decoded as jwt.JwtPayload;
   } catch (error) {
-    throw new Error('Expired or invalid token');
+    throw new APIError(401, 'Invalid token');
   }
 };

@@ -1,4 +1,3 @@
-// import { IUser } from '../interfaces/IUser';
 import APIError from '../helpers/error.helper';
 import User from '../database/models/user.model';
 import checkPassword from './password.service';
@@ -15,9 +14,7 @@ export default class LoginService {
       throw new APIError(401, 'Incorrect email or password');
     }
     checkPassword(password, user.password);
-    const token = jwtService.createToken({
-      user,
-    });
+    const token = jwtService.createToken(user);
     return { token };
   };
 }

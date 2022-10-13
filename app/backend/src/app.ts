@@ -3,7 +3,6 @@ import * as express from 'express';
 import loginRouter from './routes/login.route';
 
 import errorMiddleware from './middlewares/error.middleware';
-// import validateLogin from './middlewares/login.middleware';
 
 class App {
   public app: express.Express;
