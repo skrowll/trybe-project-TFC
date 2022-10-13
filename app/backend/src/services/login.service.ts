@@ -14,7 +14,8 @@ export default class LoginService {
       throw new APIError(401, 'Incorrect email or password');
     }
     checkPassword(password, user.password);
-    const token = jwtService.createToken(user);
+    const { password: _, ...userWithoutPassword } = user.get();
+    const token = jwtService.createToken(userWithoutPassword);
     return { token };
   };
 }
