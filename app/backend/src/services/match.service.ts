@@ -6,7 +6,6 @@ export default class LoginService {
   matchModel = Match;
 
   public list = async () => {
-    console.log('=============================AQUI==================================');
     const allMatches = await this.matchModel.findAll({
       include: [
         { model: Team, as: 'teamHome', attributes: ['teamName'] },
