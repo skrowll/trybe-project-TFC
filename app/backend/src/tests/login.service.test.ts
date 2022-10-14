@@ -56,3 +56,13 @@ describe('/login', () => {
     });
   });
 });
+
+describe('/login/validate', () => {
+  describe('GET', () => {
+    it('testa se retorna erro ao não informar o token.', async () => {
+      const response = await chai.request(app).get('/login/validate').send();
+      expect(response.status).to.equal(401);
+      expect(response.body.message).to.be.equal('Invalid token');
+    });
+  });
+});
