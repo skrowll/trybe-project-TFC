@@ -16,6 +16,6 @@ export const validateToken = (token: string) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     return decoded as jwt.JwtPayload;
   } catch (error) {
-    throw new APIError(401, 'Invalid token');
+    throw new APIError(401, 'Token must be a valid token');
   }
 };

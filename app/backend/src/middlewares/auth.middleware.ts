@@ -13,7 +13,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
     jwt.verify(authorization, JWT_SECRET);
   } catch (error) {
     console.log(error);
-    throw new APIError(401, 'Invalid token');
+    throw new APIError(401, 'Token must be a valid token');
   }
   next();
 };
