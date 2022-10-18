@@ -52,4 +52,12 @@ export default class LoginService {
 
     return createdMatch;
   };
+
+  public finishMatch = async (id: number) => {
+    const updatedMatch = await this.matchModel.update({ inProgress: false }, { where: { id } });
+    if (!updatedMatch) {
+      throw new APIError(404, 'Not found');
+    }
+    return { message: 'Finished' };
+  };
 }

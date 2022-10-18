@@ -33,4 +33,15 @@ export default class UserController {
       next(error);
     }
   };
+
+  public finishMatch = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      const result = await this.matchService.finishMatch(Number(id));
+      const { message } = result;
+      return res.status(200).json({ message });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
