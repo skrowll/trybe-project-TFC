@@ -6,5 +6,6 @@ const matchController = new MatchController();
 
 matchRouter.get('/', matchController.listAllInProgress);
 matchRouter.get('/', matchController.list);
+matchRouter.post('/', matchController.createNewMatch);
 
 export default matchRouter;

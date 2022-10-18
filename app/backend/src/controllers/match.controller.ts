@@ -23,4 +23,14 @@ export default class UserController {
       next(error);
     }
   };
+
+  public createNewMatch = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const match = req.body;
+      const result = await this.matchService.createNewMatch(match);
+      return res.status(201).json(result);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
