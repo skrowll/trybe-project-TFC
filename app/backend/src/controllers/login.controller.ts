@@ -19,7 +19,7 @@ export default class UserController {
   public validate = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = req.headers.authorization;
-      if (!token) throw new APIError(401, 'Invalid token');
+      if (!token) throw new APIError(401, 'Token must be a valid token');
       const { role } = jwtService.validateToken(token);
       return res.status(200).json({ role });
     } catch (error) {
