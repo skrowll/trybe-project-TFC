@@ -9,5 +9,6 @@ matchRouter.get('/', matchController.listAllInProgress);
 matchRouter.get('/', matchController.list);
 matchRouter.post('/', authMiddleware, matchController.createNewMatch);
 matchRouter.patch('/:id/finish', matchController.finishMatch);
+matchRouter.patch('/:id', matchController.updateGoals);
 
 export default matchRouter;

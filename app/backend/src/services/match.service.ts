@@ -60,4 +60,14 @@ export default class LoginService {
     }
     return { message: 'Finished' };
   };
+
+  public updateGoals = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+    const updatedMatchGoals = await this.matchModel.update({
+      homeTeamGoals, awayTeamGoals,
+    }, { where: { id } });
+    if (!updatedMatchGoals) {
+      throw new APIError(404, 'Not found');
+    }
+    return { message: 'Updated' };
+  };
 }

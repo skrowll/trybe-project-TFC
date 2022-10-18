@@ -44,4 +44,16 @@ export default class UserController {
       next(error);
     }
   };
+
+  public updateGoals = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+      const result = await this.matchService.updateGoals(Number(id), homeTeamGoals, awayTeamGoals);
+      const { message } = result;
+      return res.status(200).json({ message });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
