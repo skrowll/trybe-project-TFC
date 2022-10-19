@@ -43,6 +43,24 @@ export default class LeaderboardService {
     return leaderboard;
   };
 
+  public getAllMatches = async () => {
+    const matches = await this.matchModel.findAll({
+      where: { inProgress: false },
+      include: [
+        { model: Team, as: 'teamHome', attributes: ['teamName'] },
+        { model: Team, as: 'teamAway', attributes: ['teamName'] },
+      ],
+    });
+    if (!matches) {
+      throw new APIError(404, 'Not found');
+    }
+    const homeMatches = LeaderboardService.createHomeMatches(matches);
+    const awayMatches = LeaderboardService.createAwayMatches(matches);
+    const sumMatches = LeaderboardService.accMatches([...homeMatches, ...awayMatches]);
+    const leaderboard = LeaderboardService.completeLeaderboard(sumMatches);
+    return leaderboard;
+  };
+
   static createHomeMatches(matches: any[]) {
     return matches.map((match) => {
       let acc = { points: 0, win: 0, draw: 0, loss: 0 };

@@ -21,4 +21,13 @@ export default class LeaderboardController {
       next(error);
     }
   };
+
+  public getAllMatches = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await this.leaderboardService.getAllMatches();
+      return res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
