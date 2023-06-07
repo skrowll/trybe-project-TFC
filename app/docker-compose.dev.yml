@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.3'
 services:
   frontend:
     build: ./frontend
@@ -6,8 +6,7 @@ services:
       - 3000:3000
     working_dir: /app-frontend
     depends_on:
-      backend:
-        condition: service_healthy
+      - backend
     # Os `healthcheck` devem garantir que a aplicação
     # está operacional, antes de liberar o container
     healthcheck:
@@ -24,8 +23,7 @@ services:
     volumes: 
       - ./backend/src:/app-backend/src
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     environment:
       - APP_PORT=3001
       - JWT_SECRET=jwt_secret
@@ -42,7 +40,6 @@ services:
   db:
     image: mysql:8.0.21
     container_name: db
-    platform: linux/x86_64
     ports:
       - 3002:3306
     environment:
