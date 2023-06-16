@@ -30,6 +30,7 @@ services:
       - DB_PASS=123456
       - DB_HOST=db
       - DB_PORT=3306
+      - DB_NAME=TRYBE_FUTEBOL_CLUBE
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
       timeout: 10s
