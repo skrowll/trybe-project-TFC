@@ -2,6 +2,7 @@ import APIError from '../helpers/error.helper';
 import Match from '../database/models/match.model';
 import Team from '../database/models/team.model';
 import { ILeaderboard } from '../interfaces/ILeaderboard';
+import { IMatch } from '../interfaces/IMatch';
 
 export default class LeaderboardService {
   matchModel = Match;
@@ -15,10 +16,12 @@ export default class LeaderboardService {
         as: 'teamHome',
         attributes: ['teamName'],
       }],
-    });
+    }) as IMatch[];
+
     if (!matches) {
       throw new APIError(404, 'Not found');
-    }
+    };
+
     const homeMatches = LeaderboardService.createHomeMatches(matches);
     const sumMatches = LeaderboardService.accMatches(homeMatches);
     const leaderboard = LeaderboardService.completeLeaderboard(sumMatches);
@@ -33,10 +36,12 @@ export default class LeaderboardService {
         as: 'teamAway',
         attributes: ['teamName'],
       }],
-    });
+    }) as IMatch[];
+
     if (!matches) {
       throw new APIError(404, 'Not found');
-    }
+    };
+
     const awayMatches = LeaderboardService.createAwayMatches(matches);
     const sumMatches = LeaderboardService.accMatches(awayMatches);
     const leaderboard = LeaderboardService.completeLeaderboard(sumMatches);
@@ -50,10 +55,12 @@ export default class LeaderboardService {
         { model: Team, as: 'teamHome', attributes: ['teamName'] },
         { model: Team, as: 'teamAway', attributes: ['teamName'] },
       ],
-    });
+    }) as IMatch[];
+
     if (!matches) {
       throw new APIError(404, 'Not found');
-    }
+    };
+
     const homeMatches = LeaderboardService.createHomeMatches(matches);
     const awayMatches = LeaderboardService.createAwayMatches(matches);
     const sumMatches = LeaderboardService.accMatches([...homeMatches, ...awayMatches]);

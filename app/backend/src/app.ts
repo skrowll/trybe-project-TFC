@@ -15,8 +15,7 @@ class App {
 
     this.config();
 
-    // Não remover essa rota
-    this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.get('/', (_req, res) => res.json({ ok: true }));
 
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamRouter);
@@ -45,5 +44,4 @@ class App {
 
 export { App };
 
-// A execução dos testes de cobertura depende dessa exportação
 export const { app } = new App();

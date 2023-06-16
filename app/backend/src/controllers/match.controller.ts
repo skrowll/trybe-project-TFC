@@ -16,7 +16,7 @@ export default class UserController {
   public listAllInProgress = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { inProgress } = req.query;
-      if (!inProgress) return next();
+      if (inProgress === undefined) return next();
       const result = await this.matchService.listAllInProgress(inProgress === 'true');
       return res.status(200).json(result);
     } catch (error) {
