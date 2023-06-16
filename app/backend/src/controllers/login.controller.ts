@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import LoginService from '../services/login.service';
 import * as jwtService from '../services/jwt.service';
-import APIError from '../helpers/error.helper';
 
 export default class UserController {
   loginService = new LoginService();
@@ -19,8 +18,7 @@ export default class UserController {
   public validate = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = req.headers.authorization;
-      if (!token) throw new APIError(401, 'Token must be a valid token');
-      const { role } = jwtService.validateToken(token);
+      const { role } = jwtService.validateToken(token as string);
       return res.status(200).json({ role });
     } catch (error) {
       next(error);

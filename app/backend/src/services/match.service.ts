@@ -49,7 +49,7 @@ export default class LoginService {
     const createdMatch = await this.matchModel.create({
       homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress,
     });
-
+    
     return createdMatch;
   };
 

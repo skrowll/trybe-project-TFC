@@ -1,21 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
-import * as jwt from 'jsonwebtoken';
 import APIError from '../helpers/error.helper';
+import { validateToken } from '../services/jwt.service';
 
-const JWT_SECRET = 'jwt_secret';
-
-const validateToken = (req: Request, res: Response, next: NextFunction) => {
-  const { authorization } = req.headers;
-  if (!authorization) {
-    throw new APIError(401, 'Token not found');
-  }
+const validateRole = (req: Request, res: Response, next: NextFunction) => {
   try {
-    jwt.verify(authorization, JWT_SECRET);
+    const token = req.headers.authorization;
+    const { role } = validateToken(token as string);
+    if (role !== 'admin') {
+      throw new APIError(401, 'You must be an Admin');
+    }
+    next();
   } catch (error) {
-    console.log(error);
-    throw new APIError(401, 'Token must be a valid token');
+    next(error);
   }
-  next();
 };
 
-export default validateToken;
+export default validateRole;
